@@ -253,7 +253,7 @@ function main() {
     console.log(`\n  ${file}`);
     for (const v of violations) {
       const tag = v.type === 'HARDCODED_HEX' ? '[HEX]     ' : '[SPACING] ';
-      console.log(`    ${tag} Line ${String(v.lineNum || v.line).padEnd(4)}  ${v.detail}`);
+      console.log(`    ${tag} Line ${String(v.line).padEnd(4)}  ${v.detail}`);
       console.log(`              ${v.snippet}`);
       if (v.type === 'HARDCODED_HEX') hexCount++;
       else spacingCount++;
