@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GetFunnelCaked - Table Example</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    /* =========================================================
+       Token Definitions
+       ========================================================= */
+    :root {
+      --token-color-action-primary: #22c55e;
+      --token-color-action-primary-hover: #16a34a;
+      --token-color-action-primary-active: #15803d;
+      --token-color-action-primary-disabled: #166534;
+      --token-color-interaction-accent: #22d3ee;
+      --token-color-interaction-accent-hover: #06b6d4;
+      --token-color-brand-emphasis: #a78bfa;
+      --token-color-text-primary: #f1f5f9;
+      --token-color-text-secondary: #94a3b8;
+      --token-color-text-muted: #475569;
+      --token-color-text-inverse: #0f172a;
+      --token-color-surface-base: #0f172a;
+      --token-color-surface-raised: #1e293b;
+      --token-color-surface-overlay: #334155;
+      --token-color-surface-border: #334155;
+      --token-color-status-success: #22c55e;
+      --token-color-status-warning: #f59e0b;
+      --token-color-status-error: #ef4444;
+      --token-color-status-info: #22d3ee;
+
+      --token-spacing-1: 4px;
+      --token-spacing-2: 8px;
+      --token-spacing-3: 12px;
+      --token-spacing-4: 16px;
+      --token-spacing-5: 20px;
+      --token-spacing-6: 24px;
+      --token-spacing-8: 32px;
+      --token-spacing-10: 40px;
+      --token-spacing-12: 48px;
+      --token-spacing-16: 64px;
+
+      --token-radius-sm: 4px;
+      --token-radius-md: 6px;
+      --token-radius-lg: 8px;
+      --token-radius-xl: 12px;
+      --token-radius-full: 9999px;
+
+      --token-font-family-base: Inter, system-ui, sans-serif;
+      --token-font-family-mono: JetBrains Mono, monospace;
+      --token-font-size-xs: 11px;
+      --token-font-size-sm: 13px;
+      --token-font-size-base: 14px;
+      --token-font-size-md: 16px;
+      --token-font-size-lg: 18px;
+      --token-font-size-xl: 20px;
+      --token-font-size-2xl: 24px;
+      --token-font-weight-regular: 400;
+      --token-font-weight-medium: 500;
+      --token-font-weight-semibold: 600;
+      --token-font-weight-bold: 700;
+      --token-leading-tight: 1.25;
+      --token-leading-base: 1.5;
+    }
+
+    /* =========================================================
+       Base Reset
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--token-font-family-base);
+      font-size: var(--token-font-size-base);
+      line-height: var(--token-leading-base);
+      background-color: var(--token-color-surface-base);
+      color: var(--token-color-text-primary);
+      min-height: 100vh;
+      padding: var(--token-spacing-10) var(--token-spacing-6);
+    }
+
+    /* =========================================================
+       Page Layout
+       ========================================================= */
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: var(--token-spacing-6);
+    }
+
+    .page-title {
+      font-size: var(--token-font-size-2xl);
+      font-weight: var(--token-font-weight-bold);
+      color: var(--token-color-brand-emphasis);
+      margin-bottom: var(--token-spacing-1);
+    }
+
+    .page-subtitle {
+      font-size: var(--token-font-size-sm);
+      color: var(--token-color-text-secondary);
+    }
+
+    /* =========================================================
+       Toolbar
+       ========================================================= */
+    .table-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--token-spacing-4);
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: var(--token-spacing-3);
+    }
+
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: var(--token-spacing-2);
+    }
+
+    .search-wrapper {
+      position: relative;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: var(--token-spacing-3);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--token-color-text-muted);
+      pointer-events: none;
+    }
+
+    .search-input {
+      background-color: var(--token-color-surface-raised);
+      color: var(--token-color-text-primary);
+      border: 1px solid var(--token-color-surface-border);
+      border-radius: var(--token-radius-md);
+      padding: var(--token-spacing-2) var(--token-spacing-3) var(--token-spacing-2) var(--token-spacing-8);
+      font-size: var(--token-font-size-base);
+      font-family: var(--token-font-family-base);
+      width: 240px;
+    }
+
+    .search-input::placeholder {
+      color: var(--token-color-text-muted);
+    }
+
+    .search-input:focus {
+      outline: 2px solid var(--token-color-interaction-accent);
+      outline-offset: 2px;
+      border-color: var(--token-color-interaction-accent);
+    }
+
+    .results-count {
+      font-size: var(--token-font-size-sm);
+      color: var(--token-color-text-muted);
+    }
+
+    /* =========================================================
+       Buttons
+       ========================================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--token-spacing-2);
+      padding: var(--token-spacing-2) var(--token-spacing-4);
+      border-radius: var(--token-radius-md);
+      font-size: var(--token-font-size-base);
+      font-weight: var(--token-font-weight-semibold);
+      font-family: var(--token-font-family-base);
+      cursor: pointer;
+      border: none;
+      transition: all 150ms ease;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--token-color-interaction-accent);
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      background-color: var(--token-color-action-primary);
+      color: var(--token-color-text-inverse);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--token-color-action-primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-ghost {
+      background-color: transparent;
+      color: var(--token-color-text-secondary);
+      border: none;
+      padding: var(--token-spacing-2);
+    }
+
+    .btn-ghost:hover {
+      color: var(--token-color-text-primary);
+      background-color: var(--token-color-surface-overlay);
+    }
+
+    .btn-danger-ghost {
+      background-color: transparent;
+      color: var(--token-color-text-muted);
+      border: none;
+      padding: var(--token-spacing-2);
+    }
+
+    .btn-danger-ghost:hover {
+      color: var(--token-color-status-error);
+      background-color: rgba(239, 68, 68, 0.1);
+    }
+
+    /* =========================================================
+       Table
+       ========================================================= */
+    .table-wrapper {
+      background-color: var(--token-color-surface-raised);
+      border: 1px solid var(--token-color-surface-border);
+      border-radius: var(--token-radius-lg);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead tr {
+      background-color: var(--token-color-surface-overlay);
+    }
+
+    th {
+      padding: var(--token-spacing-3) var(--token-spacing-4);
+      text-align: left;
+      font-size: var(--token-font-size-sm);
+      font-weight: var(--token-font-weight-semibold);
+      color: var(--token-color-text-secondary);
+      white-space: nowrap;
+    }
+
+    th.sortable {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    th.sortable:hover {
+      color: var(--token-color-text-primary);
+    }
+
+    th.sortable .sort-icon {
+      font-size: 14px;
+      color: var(--token-color-text-muted);
+      vertical-align: middle;
+      margin-left: var(--token-spacing-1);
+    }
+
+    th.sort-asc .sort-icon,
+    th.sort-desc .sort-icon {
+      color: var(--token-color-interaction-accent);
+    }
+
+    th.actions-col {
+      text-align: right;
+    }
+
+    td {
+      padding: var(--token-spacing-3) var(--token-spacing-4);
+      font-size: var(--token-font-size-base);
+      color: var(--token-color-text-primary);
+      border-bottom: 1px solid var(--token-color-surface-border);
+      vertical-align: middle;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover td {
+      background-color: var(--token-color-surface-overlay);
+    }
+
+    td.actions-cell {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    td.mono-cell {
+      font-family: var(--token-font-family-mono);
+      font-size: var(--token-font-size-sm);
+    }
+
+    td.muted-cell {
+      color: var(--token-color-text-secondary);
+      font-size: var(--token-font-size-sm);
+    }
+
+    /* =========================================================
+       Badges
+       ========================================================= */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--token-spacing-1);
+      padding: var(--token-spacing-1) var(--token-spacing-2);
+      border-radius: var(--token-radius-full);
+      font-size: var(--token-font-size-xs);
+      font-weight: var(--token-font-weight-semibold);
+      line-height: var(--token-leading-tight);
+      white-space: nowrap;
+    }
+
+    .badge-success {
+      background-color: rgba(34, 197, 94, 0.15);
+      color: var(--token-color-status-success);
+    }
+
+    .badge-warning {
+      background-color: rgba(245, 158, 11, 0.15);
+      color: var(--token-color-status-warning);
+    }
+
+    .badge-error {
+      background-color: rgba(239, 68, 68, 0.15);
+      color: var(--token-color-status-error);
+    }
+
+    .badge-info {
+      background-color: rgba(34, 211, 238, 0.15);
+      color: var(--token-color-status-info);
+    }
+
+    .badge-neutral {
+      background-color: rgba(148, 163, 184, 0.15);
+      color: var(--token-color-text-secondary);
+    }
+
+    /* =========================================================
+       Empty State
+       ========================================================= */
+    .empty-state {
+      padding: var(--token-spacing-10) var(--token-spacing-4);
+      text-align: center;
+      color: var(--token-color-text-muted);
+    }
+
+    .empty-state-icon {
+      font-size: 32px;
+      color: var(--token-color-text-muted);
+      margin-bottom: var(--token-spacing-3);
+    }
+
+    .empty-state-title {
+      font-size: var(--token-font-size-base);
+      font-weight: var(--token-font-weight-semibold);
+      margin-bottom: var(--token-spacing-1);
+    }
+
+    .empty-state-subtitle {
+      font-size: var(--token-font-size-sm);
+      color: var(--token-color-text-muted);
+    }
+
+    /* =========================================================
+       Section Divider
+       ========================================================= */
+    .section {
+      margin-bottom: var(--token-spacing-10);
+    }
+
+    .section-label {
+      font-size: var(--token-font-size-sm);
+      font-weight: var(--token-font-weight-semibold);
+      color: var(--token-color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: var(--token-spacing-3);
+    }
+
+    /* =========================================================
+       Avatar
+       ========================================================= */
+    .avatar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--token-radius-full);
+      background-color: var(--token-color-surface-overlay);
+      font-size: var(--token-font-size-xs);
+      font-weight: var(--token-font-weight-bold);
+      color: var(--token-color-text-secondary);
+      margin-right: var(--token-spacing-2);
+      flex-shrink: 0;
+    }
+
+    .name-cell {
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Contacts</h1>
+        <p class="page-subtitle">Manage and filter your contact list. Click column headers to sort.</p>
+      </div>
+      <button class="btn btn-primary">
+        <i class="ti ti-user-plus"></i>
+        Add Contact
+      </button>
+    </div>
+
+    <!-- Table 1: Sortable with Row Actions -->
+    <div class="section">
+      <div class="section-label">Sortable Table with Row Actions</div>
+
+      <div class="table-toolbar">
+        <div class="toolbar-left">
+          <div class="search-wrapper">
+            <i class="ti ti-search search-icon"></i>
+            <input type="text" class="search-input" placeholder="Search contacts..." id="search-input" />
+          </div>
+          <span class="results-count" id="results-count">5 contacts</span>
+        </div>
+        <div class="toolbar-right">
+          <button class="btn btn-ghost" aria-label="Filter" style="padding: var(--token-spacing-2) var(--token-spacing-3);">
+            <i class="ti ti-filter"></i>
+            Filter
+          </button>
+          <button class="btn btn-ghost" aria-label="Export" style="padding: var(--token-spacing-2) var(--token-spacing-3);">
+            <i class="ti ti-download"></i>
+            Export
+          </button>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="contacts-table">
+          <thead>
+            <tr>
+              <th class="sortable" data-col="name" onclick="sortTable('name')">
+                Name <i class="ti ti-arrows-sort sort-icon"></i>
+              </th>
+              <th class="sortable" data-col="email" onclick="sortTable('email')">
+                Email <i class="ti ti-arrows-sort sort-icon"></i>
+              </th>
+              <th class="sortable" data-col="status" onclick="sortTable('status')">
+                Status <i class="ti ti-arrows-sort sort-icon"></i>
+              </th>
+              <th class="sortable" data-col="score" onclick="sortTable('score')">
+                Lead Score <i class="ti ti-arrows-sort sort-icon"></i>
+              </th>
+              <th class="sortable" data-col="created" onclick="sortTable('created')">
+                Created <i class="ti ti-arrows-sort sort-icon"></i>
+              </th>
+              <th class="actions-col">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Table 2: Empty State -->
+    <div class="section">
+      <div class="section-label">Empty State</div>
+
+      <div class="table-wrapper">
+        <table>
+          <tbody>
+            <tr>
+              <td colspan="6">
+                <div class="empty-state">
+                  <div class="empty-state-icon"><i class="ti ti-inbox"></i></div>
+                  <div class="empty-state-title">No contacts found</div>
+                  <div class="empty-state-subtitle">Try adjusting your filters or add a new contact to get started.</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const contacts = [
+      { id: 1, name: 'Renata Osei',      initials: 'RO', email: 'renata@example.com',  status: 'active',    score: 87,  created: '2024-01-12' },
+      { id: 2, name: 'Marcus Tilley',    initials: 'MT', email: 'marcus@example.com',  status: 'inactive',  score: 42,  created: '2024-02-28' },
+      { id: 3, name: 'Yuki Fernandez',   initials: 'YF', email: 'yuki@example.com',    status: 'lead',      score: 61,  created: '2024-03-05' },
+      { id: 4, name: 'Priya Nkemdirim', initials: 'PN', email: 'priya@example.com',   status: 'churned',   score: 19,  created: '2023-11-14' },
+      { id: 5, name: 'Aleksei Voss',    initials: 'AV', email: 'aleksei@example.com', status: 'active',    score: 94,  created: '2024-04-01' }
+    ];
+
+    const statusBadge = {
+      active:   '<span class="badge badge-success">Active</span>',
+      inactive: '<span class="badge badge-neutral">Inactive</span>',
+      lead:     '<span class="badge badge-info">Lead</span>',
+      churned:  '<span class="badge badge-error">Churned</span>',
+      warning:  '<span class="badge badge-warning">At Risk</span>'
+    };
+
+    let currentSort = { col: null, dir: 'asc' };
+    let filteredContacts = [...contacts];
+
+    function renderTable(data) {
+      const tbody = document.getElementById('table-body');
+      document.getElementById('results-count').textContent = data.length + ' contact' + (data.length !== 1 ? 's' : '');
+
+      if (data.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6">
+              <div class="empty-state">
+                <div class="empty-state-icon"><i class="ti ti-search-off"></i></div>
+                <div class="empty-state-title">No results match your search</div>
+                <div class="empty-state-subtitle">Try a different name or email address.</div>
+              </div>
+            </td>
+          </tr>`;
+        return;
+      }
+
+      tbody.innerHTML = data.map(c => `
+        <tr>
+          <td>
+            <div class="name-cell">
+              <div class="avatar">${c.initials}</div>
+              ${c.name}
+            </div>
+          </td>
+          <td class="muted-cell">${c.email}</td>
+          <td>${statusBadge[c.status] || ''}</td>
+          <td class="mono-cell">${c.score}</td>
+          <td class="muted-cell">${c.created}</td>
+          <td class="actions-cell">
+            <button class="btn btn-ghost" aria-label="Edit ${c.name}" onclick="editRow(${c.id})">
+              <i class="ti ti-edit"></i>
+            </button>
+            <button class="btn btn-danger-ghost" aria-label="Delete ${c.name}" onclick="deleteRow(${c.id})">
+              <i class="ti ti-trash"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function sortTable(col) {
+      const headers = document.querySelectorAll('th[data-col]');
+      headers.forEach(h => {
+        h.classList.remove('sort-asc', 'sort-desc');
+        h.querySelector('.sort-icon').className = 'ti ti-arrows-sort sort-icon';
+      });
+
+      if (currentSort.col === col) {
+        currentSort.dir = currentSort.dir === 'asc' ? 'desc' : 'asc';
+      } else {
+        currentSort.col = col;
+        currentSort.dir = 'asc';
+      }
+
+      const activeHeader = document.querySelector(`th[data-col="${col}"]`);
+      const dirClass = currentSort.dir === 'asc' ? 'sort-asc' : 'sort-desc';
+      const iconClass = currentSort.dir === 'asc' ? 'ti ti-arrow-up sort-icon' : 'ti ti-arrow-down sort-icon';
+      activeHeader.classList.add(dirClass);
+      activeHeader.querySelector('.sort-icon').className = iconClass;
+
+      filteredContacts.sort((a, b) => {
+        let av = a[col], bv = b[col];
+        if (typeof av === 'string') av = av.toLowerCase();
+        if (typeof bv === 'string') bv = bv.toLowerCase();
+        if (av < bv) return currentSort.dir === 'asc' ? -1 : 1;
+        if (av > bv) return currentSort.dir === 'asc' ? 1 : -1;
+        return 0;
+      });
+
+      renderTable(filteredContacts);
+    }
+
+    document.getElementById('search-input').addEventListener('input', function () {
+      const q = this.value.toLowerCase();
+      filteredContacts = contacts.filter(c =>
+        c.name.toLowerCase().includes(q) || c.email.toLowerCase().includes(q)
+      );
+      renderTable(filteredContacts);
+    });
+
+    function editRow(id) {
+      const c = contacts.find(x => x.id === id);
+      alert('Edit: ' + c.name);
+    }
+
+    function deleteRow(id) {
+      const c = contacts.find(x => x.id === id);
+      if (confirm('Delete ' + c.name + '?')) {
+        filteredContacts = filteredContacts.filter(x => x.id !== id);
+        renderTable(filteredContacts);
+      }
+    }
+
+    renderTable(contacts);
+  </script>
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GetFunnelCaked - Form Example</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    /* =========================================================
+       Token Definitions
+       ========================================================= */
+    :root {
+      --token-color-action-primary: #22c55e;
+      --token-color-action-primary-hover: #16a34a;
+      --token-color-action-primary-active: #15803d;
+      --token-color-action-primary-disabled: #166534;
+      --token-color-interaction-accent: #22d3ee;
+      --token-color-interaction-accent-hover: #06b6d4;
+      --token-color-brand-emphasis: #a78bfa;
+      --token-color-text-primary: #f1f5f9;
+      --token-color-text-secondary: #94a3b8;
+      --token-color-text-muted: #475569;
+      --token-color-text-inverse: #0f172a;
+      --token-color-surface-base: #0f172a;
+      --token-color-surface-raised: #1e293b;
+      --token-color-surface-overlay: #334155;
+      --token-color-surface-border: #334155;
+      --token-color-status-success: #22c55e;
+      --token-color-status-warning: #f59e0b;
+      --token-color-status-error: #ef4444;
+      --token-color-status-info: #22d3ee;
+
+      --token-spacing-1: 4px;
+      --token-spacing-2: 8px;
+      --token-spacing-3: 12px;
+      --token-spacing-4: 16px;
+      --token-spacing-5: 20px;
+      --token-spacing-6: 24px;
+      --token-spacing-8: 32px;
+      --token-spacing-10: 40px;
+      --token-spacing-12: 48px;
+      --token-spacing-16: 64px;
+
+      --token-radius-sm: 4px;
+      --token-radius-md: 6px;
+      --token-radius-lg: 8px;
+      --token-radius-xl: 12px;
+      --token-radius-full: 9999px;
+
+      --token-font-family-base: Inter, system-ui, sans-serif;
+      --token-font-family-mono: JetBrains Mono, monospace;
+      --token-font-size-xs: 11px;
+      --token-font-size-sm: 13px;
+      --token-font-size-base: 14px;
+      --token-font-size-md: 16px;
+      --token-font-size-lg: 18px;
+      --token-font-size-xl: 20px;
+      --token-font-size-2xl: 24px;
+      --token-font-weight-regular: 400;
+      --token-font-weight-medium: 500;
+      --token-font-weight-semibold: 600;
+      --token-font-weight-bold: 700;
+      --token-leading-tight: 1.25;
+      --token-leading-base: 1.5;
+    }
+
+    /* =========================================================
+       Base Reset
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--token-font-family-base);
+      font-size: var(--token-font-size-base);
+      line-height: var(--token-leading-base);
+      background-color: var(--token-color-surface-base);
+      color: var(--token-color-text-primary);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: var(--token-spacing-10) var(--token-spacing-4);
+    }
+
+    /* =========================================================
+       Form Container
+       ========================================================= */
+    .form-page {
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .page-header {
+      margin-bottom: var(--token-spacing-8);
+    }
+
+    .page-title {
+      font-size: var(--token-font-size-2xl);
+      font-weight: var(--token-font-weight-bold);
+      color: var(--token-color-brand-emphasis);
+      margin-bottom: var(--token-spacing-1);
+    }
+
+    .page-subtitle {
+      font-size: var(--token-font-size-sm);
+      color: var(--token-color-text-secondary);
+    }
+
+    .form-card {
+      background-color: var(--token-color-surface-raised);
+      border: 1px solid var(--token-color-surface-border);
+      border-radius: var(--token-radius-xl);
+      padding: var(--token-spacing-6);
+    }
+
+    .form-section {
+      margin-bottom: var(--token-spacing-6);
+    }
+
+    .form-section-title {
+      font-size: var(--token-font-size-sm);
+      font-weight: var(--token-font-weight-semibold);
+      color: var(--token-color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: var(--token-spacing-4);
+      padding-bottom: var(--token-spacing-2);
+      border-bottom: 1px solid var(--token-color-surface-border);
+    }
+
+    /* =========================================================
+       Form Fields
+       ========================================================= */
+    .field-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--token-spacing-4);
+      margin-bottom: var(--token-spacing-4);
+    }
+
+    .field-group.single {
+      grid-template-columns: 1fr;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--token-spacing-1);
+    }
+
+    label {
+      font-size: var(--token-font-size-sm);
+      font-weight: var(--token-font-weight-medium);
+      color: var(--token-color-text-secondary);
+    }
+
+    label .required {
+      color: var(--token-color-status-error);
+      margin-left: var(--token-spacing-1);
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: var(--token-spacing-3);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--token-color-text-muted);
+      pointer-events: none;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    select,
+    textarea {
+      width: 100%;
+      background-color: var(--token-color-surface-base);
+      color: var(--token-color-text-primary);
+      border: 1px solid var(--token-color-surface-border);
+      border-radius: var(--token-radius-md);
+      padding: var(--token-spacing-2) var(--token-spacing-3);
+      font-size: var(--token-font-size-base);
+      font-family: var(--token-font-family-base);
+      transition: border-color 120ms ease, outline 120ms ease;
+    }
+
+    .has-icon input,
+    .has-icon select {
+      padding-left: var(--token-spacing-8);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--token-color-text-muted);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid var(--token-color-interaction-accent);
+      outline-offset: 2px;
+      border-color: var(--token-color-interaction-accent);
+    }
+
+    /* Error state */
+    input.error,
+    select.error,
+    textarea.error {
+      border-color: var(--token-color-status-error);
+    }
+
+    input.error:focus,
+    select.error:focus,
+    textarea.error:focus {
+      outline-color: var(--token-color-status-error);
+    }
+
+    .field-error {
+      display: flex;
+      align-items: center;
+      gap: var(--token-spacing-1);
+      font-size: var(--token-font-size-sm);
+      color: var(--token-color-status-error);
+      margin-top: var(--token-spacing-1);
+    }
+
+    /* Disabled state */
+    input:disabled,
+    select:disabled,
+    textarea:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+      background-color: var(--token-color-surface-base);
+    }
+
+    .field-hint {
+      font-size: var(--token-font-size-xs);
+      color: var(--token-color-text-muted);
+      margin-top: var(--token-spacing-1);
+    }
+
+    /* Select arrow */
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--token-spacing-3) center;
+      padding-right: var(--token-spacing-8);
+      cursor: pointer;
+    }
+
+    select option {
+      background-color: var(--token-color-surface-raised);
+      color: var(--token-color-text-primary);
+    }
+
+    /* Textarea */
+    textarea {
+      resize: vertical;
+      min-height: var(--token-spacing-12);
+      line-height: var(--token-leading-base);
+    }
+
+    /* =========================================================
+       Checkbox / Radio
+       ========================================================= */
+    .check-field {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--token-spacing-2);
+      cursor: pointer;
+    }
+
+    .check-field input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      accent-color: var(--token-color-action-primary);
+      cursor: pointer;
+      margin-top: 1px;
+    }
+
+    .check-field label {
+      cursor: pointer;
+      font-size: var(--token-font-size-base);
+      color: var(--token-color-text-secondary);
+      font-weight: var(--token-font-weight-regular);
+    }
+
+    /* =========================================================
+       Buttons
+       ========================================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--token-spacing-2);
+      padding: var(--token-spacing-2) var(--token-spacing-4);
+      border-radius: var(--token-radius-md);
+      font-size: var(--token-font-size-base);
+      font-weight: var(--token-font-weight-semibold);
+      font-family: var(--token-font-family-base);
+      cursor: pointer;
+      border: none;
+      transition: all 150ms ease;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--token-color-interaction-accent);
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      background-color: var(--token-color-action-primary);
+      color: var(--token-color-text-inverse);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--token-color-action-primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-ghost {
+      background-color: transparent;
+      color: var(--token-color-text-secondary);
+      border: 1px solid var(--token-color-surface-border);
+    }
+
+    .btn-ghost:hover {
+      color: var(--token-color-text-primary);
+      background-color: var(--token-color-surface-overlay);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .form-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: var(--token-spacing-3);
+      padding-top: var(--token-spacing-6);
+      border-top: 1px solid var(--token-color-surface-border);
+    }
+
+    /* =========================================================
+       State Demo Section
+       ========================================================= */
+    .state-demo {
+      margin-top: var(--token-spacing-8);
+    }
+
+    .state-demo-title {
+      font-size: var(--token-font-size-md);
+      font-weight: var(--token-font-weight-semibold);
+      color: var(--token-color-brand-emphasis);
+      margin-bottom: var(--token-spacing-4);
+    }
+
+    .states-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--token-spacing-4);
+    }
+
+    .state-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--token-spacing-2);
+    }
+
+    .state-label-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--token-spacing-1);
+      font-size: var(--token-font-size-xs);
+      font-weight: var(--token-font-weight-semibold);
+      color: var(--token-color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-page">
+    <div class="page-header">
+      <h1 class="page-title">New Campaign</h1>
+      <p class="page-subtitle">Configure your campaign settings. Required fields are marked with an asterisk.</p>
+    </div>
+
+    <div class="form-card">
+      <form novalidate>
+        <!-- Section: Campaign Info -->
+        <div class="form-section">
+          <div class="form-section-title">Campaign Details</div>
+
+          <div class="field-group single">
+            <div class="field">
+              <label for="campaign-name">Campaign Name <span class="required">*</span></label>
+              <div class="input-wrapper has-icon">
+                <i class="ti ti-speakerphone input-icon"></i>
+                <input
+                  type="text"
+                  id="campaign-name"
+                  placeholder="e.g., Q1 Lead Gen"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field">
+              <label for="campaign-type">Type <span class="required">*</span></label>
+              <div class="input-wrapper has-icon">
+                <i class="ti ti-category input-icon"></i>
+                <select id="campaign-type">
+                  <option value="" disabled selected>Select type</option>
+                  <option value="email">Email</option>
+                  <option value="sms">SMS</option>
+                  <option value="push">Push Notification</option>
+                  <option value="in-app">In-App</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="campaign-segment">Target Segment</label>
+              <div class="input-wrapper has-icon">
+                <i class="ti ti-filter input-icon"></i>
+                <select id="campaign-segment">
+                  <option value="" disabled selected>All contacts</option>
+                  <option value="leads">New Leads</option>
+                  <option value="customers">Existing Customers</option>
+                  <option value="churned">Churned Users</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group single">
+            <div class="field">
+              <label for="campaign-desc">Description</label>
+              <textarea
+                id="campaign-desc"
+                rows="3"
+                placeholder="What is this campaign intended to accomplish?"
+              ></textarea>
+              <span class="field-hint">Optional. Max 280 characters.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Sender Info -->
+        <div class="form-section">
+          <div class="form-section-title">Sender Information</div>
+
+          <div class="field-group">
+            <div class="field">
+              <label for="sender-name">Sender Name <span class="required">*</span></label>
+              <input
+                type="text"
+                id="sender-name"
+                placeholder="Your name or brand"
+              />
+            </div>
+
+            <div class="field">
+              <label for="sender-email">Reply-to Email <span class="required">*</span></label>
+              <div class="input-wrapper has-icon">
+                <i class="ti ti-mail input-icon"></i>
+                <input
+                  type="email"
+                  id="sender-email"
+                  class="error"
+                  placeholder="reply@yourdomain.com"
+                  value="not-a-valid-email"
+                  aria-describedby="sender-email-error"
+                />
+              </div>
+              <span class="field-error" id="sender-email-error">
+                <i class="ti ti-alert-circle"></i>
+                Enter a valid email address.
+              </span>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field">
+              <label for="tracking-url">UTM Source URL</label>
+              <div class="input-wrapper has-icon">
+                <i class="ti ti-link input-icon"></i>
+                <input
+                  type="url"
+                  id="tracking-url"
+                  placeholder="https://yoursite.com"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="budget">Budget (USD)</label>
+              <input
+                type="text"
+                id="budget"
+                disabled
+                placeholder="Locked for this account tier"
+              />
+              <span class="field-hint">Upgrade your plan to set a budget cap.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Options -->
+        <div class="form-section">
+          <div class="form-section-title">Options</div>
+
+          <div class="field-group single">
+            <div class="field" style="gap: 12px;">
+              <label class="check-field">
+                <input type="checkbox" checked />
+                <span>Send confirmation email when campaign goes live</span>
+              </label>
+              <label class="check-field">
+                <input type="checkbox" />
+                <span>Enable A/B testing (splits audience 50/50)</span>
+              </label>
+              <label class="check-field">
+                <input type="checkbox" checked />
+                <span>Track click-through events</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="ti ti-rocket"></i>
+            Launch Campaign
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Input State Reference -->
+    <div class="state-demo">
+      <h2 class="state-demo-title">Input States Reference</h2>
+      <div class="states-grid">
+        <div class="state-item">
+          <span class="state-label-tag"><i class="ti ti-circle"></i> Default</span>
+          <input type="text" placeholder="Default input" />
+        </div>
+        <div class="state-item">
+          <span class="state-label-tag"><i class="ti ti-eye"></i> Focus (click to see)</span>
+          <input type="text" placeholder="Click to focus" />
+        </div>
+        <div class="state-item">
+          <span class="state-label-tag"><i class="ti ti-alert-circle"></i> Error</span>
+          <input type="text" class="error" value="Invalid value" />
+          <span class="field-error"><i class="ti ti-alert-circle"></i> This field has an error.</span>
+        </div>
+        <div class="state-item">
+          <span class="state-label-tag"><i class="ti ti-lock"></i> Disabled</span>
+          <input type="text" disabled placeholder="Disabled input" />
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

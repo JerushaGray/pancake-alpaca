@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GetFunnelCaked - Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    /* =========================================================
+       Token Definitions
+       ========================================================= */
+    :root {
+      /* Colors */
+      --token-color-action-primary: #22c55e;
+      --token-color-action-primary-hover: #16a34a;
+      --token-color-action-primary-active: #15803d;
+      --token-color-action-primary-disabled: #166534;
+      --token-color-interaction-accent: #22d3ee;
+      --token-color-interaction-accent-hover: #06b6d4;
+      --token-color-brand-emphasis: #a78bfa;
+      --token-color-brand-emphasis-hover: #8b5cf6;
+      --token-color-text-primary: #f1f5f9;
+      --token-color-text-secondary: #94a3b8;
+      --token-color-text-muted: #475569;
+      --token-color-text-inverse: #0f172a;
+      --token-color-surface-base: #0f172a;
+      --token-color-surface-raised: #1e293b;
+      --token-color-surface-overlay: #334155;
+      --token-color-surface-border: #334155;
+      --token-color-status-success: #22c55e;
+      --token-color-status-warning: #f59e0b;
+      --token-color-status-error: #ef4444;
+      --token-color-status-info: #22d3ee;
+
+      /* Spacing */
+      --token-spacing-1: 4px;
+      --token-spacing-2: 8px;
+      --token-spacing-3: 12px;
+      --token-spacing-4: 16px;
+      --token-spacing-5: 20px;
+      --token-spacing-6: 24px;
+      --token-spacing-8: 32px;
+      --token-spacing-10: 40px;
+      --token-spacing-12: 48px;
+      --token-spacing-16: 64px;
+
+      /* Radius */
+      --token-radius-sm: 4px;
+      --token-radius-md: 6px;
+      --token-radius-lg: 8px;
+      --token-radius-xl: 12px;
+      --token-radius-full: 9999px;
+
+      /* Typography */
+      --token-font-family-base: Inter, system-ui, sans-serif;
+      --token-font-family-mono: JetBrains Mono, monospace;
+      --token-font-size-xs: 11px;
+      --token-font-size-sm: 13px;
+      --token-font-size-base: 14px;
+      --token-font-size-md: 16px;
+      --token-font-size-lg: 18px;
+      --token-font-size-xl: 20px;
+      --token-font-size-2xl: 24px;
+      --token-font-size-3xl: 30px;
+      --token-font-weight-regular: 400;
+      --token-font-weight-medium: 500;
+      --token-font-weight-semibold: 600;
+      --token-font-weight-bold: 700;
+      --token-leading-tight: 1.25;
+      --token-leading-base: 1.5;
+    }
+
+    /* =========================================================
+       Base Reset
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--token-font-family-base);
+      font-size: var(--token-font-size-base);
+      line-height: var(--token-leading-base);
+      background-color: var(--token-color-surface-base);
+      color: var(--token-color-text-primary);
+      min-height: 100vh;
+    }
+
+    /* =========================================================
+       Layout
+       ========================================================= */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* =========================================================
+       Sidebar Navigation
+       ========================================================= */
+    .sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      background-color: var(--token-color-surface-raised);
+      border-right: 1px solid var(--token-color-surface-border);
+      padding: var(--token-spacing-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--token-spacing-2);
+    }
+
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: var(--token-spacing-2);
+      padding: var(--token-spacing-3) var(--token-spacing-3);
+      margin-bottom: var(--token-spacing-4);
+      border-bottom: 1px solid var(--token-color-surface-border);
+    }
+
+    .sidebar-logo-icon {
+      font-size: 20px;
+      color: var(--token-color-action-primary);
+    }
+
+    .sidebar-logo-text {
+      font-size: var(--token-font-size-md);
+      font-weight: var(--token-font-weight-bold);
+      color: var(--token-color-brand-emphasis);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-section-label {
+      font-size: var(--token-font-size-xs);
+      font-weight: var(--token-font-weight-semibold);
+      color: var(--token-color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: var(--token-spacing-3) var(--token-spacing-3) var(--token-spacing-1);
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: var(--token-spacing-3);
+      padding: var(--token-spacing-2) var(--token-spacing-3);
+      border-radius: var(--token-radius-md);
+      font-size: var(--token-font-size-base);
+      font-weight: var(--token-font-weight-medium);
+      color: var(--token-color-text-secondary);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 120ms ease;
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+    }
+
+    .nav-item:hover {
+      color: var(--token-color-text-primary);
+      background-color: var(--token-color-surface-overlay);
+    }
+
+    .nav-item:hover .nav-item-icon {
+      color: var(--token-color-interaction-accent);
+    }
+
+    .nav-item:focus-visible {
+      outline: 2px solid var(--token-color-interaction-accent);
+      outline-offset: 2px;
+    }
+
+    .nav-item.active {
+      color: var(--token-color-action-primary);
+      background-color: rgba(34, 197, 94, 0.1);
+      font-weight: var(--token-font-weight-semibold);
+    }
+
+    .nav-item.active .nav-item-icon {
+      color: var(--token-color-action-primary);
+    }
+
+    .nav-item-icon {
+      font-size: 18px;
+      color: var(--token-color-text-secondary);
+      flex-shrink: 0;
+      transition: color 120ms ease;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: var(--token-spacing-4);
+      border-top: 1px solid var(--token-color-surface-border);
+    }
+
+    /* =========================================================
+       Main Content
+       ========================================================= */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--token-spacing-4) var(--token-spacing-6);
+      border-bottom: 1px solid var(--token-color-surface-border);
+      background-color: var(--token-color-surface-raised);
+    }
+
+    .topbar-title {
+      font-size: var(--token-font-size-lg);
+      font-weight: var(--token-font-weight-semibold);
+      color: var(--token-color-text-primary);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--token-spacing-2);
+    }
+
+    .content {
+      flex: 1;
+      padding: var(--token-spacing-6);
+      overflow-y: auto;
+    }
+
+    /* =========================================================
+       Buttons
+       ========================================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--token-spacing-2);
+      padding: var(--token-spacing-2) var(--token-spacing-4);
+      border-radius: var(--token-radius-md);
+      font-size: var(--token-font-size-base);
+      font-weight: var(--token-font-weight-semibold);
+      font-family: var(--token-font-family-base);
+      cursor: pointer;
+      border: none;
+      transition: all 150ms ease;
+      text-decoration: none;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--token-color-interaction-accent);
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      background-color: var(--token-color-action-primary);
+      color: var(--token-color-text-inverse);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--token-color-action-primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-ghost {
+      background-color: transparent;
+      color: var(--token-color-text-secondary);
+      border: none;
+    }
+
+    .btn-ghost:hover {
+      color: var(--token-color-text-primary);
+      background-color: var(--token-color-surface-overlay);
+    }
+
+    .btn-icon {
+      padding: var(--token-spacing-2);
+    }
+
+    /* =========================================================
+       Stat Cards
+       ========================================================= */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--token-spacing-4);
+      margin-bottom: var(--token-spacing-6);
+    }
+
+    .stat-card {
+      background-color: var(--token-color-surface-raised);
+      border: 1px solid var(--token-color-surface-border);
+      border-radius: var(--token-radius-lg);
+      padding: var(--token-spacing-5);
+    }
+
+    .stat-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--token-spacing-3);
+    }
+
+    .stat-card-label {
+      font-size: var(--token-font-size-sm);
+      color: var(--token-color-text-secondary);
+      font-weight: var(--token-font-weight-medium);
+    }
+
+    .stat-card-icon {
+      font-size: 18px;
+      color: var(--token-color-text-muted);
+    }
+
+    .stat-card-value {
+      font-size: var(--token-font-size-3xl);
+      font-weight: var(--token-font-weight-bold);
+      color: var(--token-color-text-primary);
+      line-height: var(--token-leading-tight);
+      margin-bottom: var(--token-spacing-2);
+    }
+
+    .stat-card-delta {
+      display: flex;
+      align-items: center;
+      gap: var(--token-spacing-1);
+      font-size: var(--token-font-size-sm);
+    }
+
+    .stat-card-delta.up {
+      color: var(--token-color-status-success);
+    }
+
+    .stat-card-delta.down {
+      color: var(--token-color-status-error);
+    }
+
+    /* =========================================================
+       Section Headers
+       ========================================================= */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--token-spacing-4);
+    }
+
+    .section-title {
+      font-size: var(--token-font-size-md);
+      font-weight: var(--token-font-weight-semibold);
+      color: var(--token-color-brand-emphasis);
+    }
+
+    /* =========================================================
+       Table
+       ========================================================= */
+    .table-wrapper {
+      background-color: var(--token-color-surface-raised);
+      border: 1px solid var(--token-color-surface-border);
+      border-radius: var(--token-radius-lg);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead tr {
+      background-color: var(--token-color-surface-overlay);
+    }
+
+    th {
+      padding: var(--token-spacing-3) var(--token-spacing-4);
+      text-align: left;
+      font-size: var(--token-font-size-sm);
+      font-weight: var(--token-font-weight-semibold);
+      color: var(--token-color-text-secondary);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: var(--token-spacing-3) var(--token-spacing-4);
+      font-size: var(--token-font-size-base);
+      color: var(--token-color-text-primary);
+      border-bottom: 1px solid var(--token-color-surface-border);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover td {
+      background-color: var(--token-color-surface-overlay);
+    }
+
+    /* =========================================================
+       Badges
+       ========================================================= */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--token-spacing-1);
+      padding: var(--token-spacing-1) var(--token-spacing-2);
+      border-radius: var(--token-radius-full);
+      font-size: var(--token-font-size-xs);
+      font-weight: var(--token-font-weight-semibold);
+      line-height: var(--token-leading-tight);
+      white-space: nowrap;
+    }
+
+    .badge-success {
+      background-color: rgba(34, 197, 94, 0.15);
+      color: var(--token-color-status-success);
+    }
+
+    .badge-warning {
+      background-color: rgba(245, 158, 11, 0.15);
+      color: var(--token-color-status-warning);
+    }
+
+    .badge-error {
+      background-color: rgba(239, 68, 68, 0.15);
+      color: var(--token-color-status-error);
+    }
+
+    .badge-info {
+      background-color: rgba(34, 211, 238, 0.15);
+      color: var(--token-color-status-info);
+    }
+
+    .badge-neutral {
+      background-color: rgba(148, 163, 184, 0.15);
+      color: var(--token-color-text-secondary);
+    }
+
+    /* =========================================================
+       Utility
+       ========================================================= */
+    .text-muted {
+      color: var(--token-color-text-muted);
+      font-size: var(--token-font-size-sm);
+    }
+
+    .mono {
+      font-family: var(--token-font-family-mono);
+      font-size: var(--token-font-size-sm);
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <i class="ti ti-stack-2 sidebar-logo-icon"></i>
+        <span class="sidebar-logo-text">FunnelCaked</span>
+      </div>
+
+      <span class="nav-section-label">Overview</span>
+
+      <a href="#" class="nav-item active">
+        <i class="ti ti-layout-dashboard nav-item-icon"></i>
+        Dashboard
+      </a>
+      <a href="#" class="nav-item">
+        <i class="ti ti-chart-bar nav-item-icon"></i>
+        Analytics
+      </a>
+      <a href="#" class="nav-item">
+        <i class="ti ti-funnel nav-item-icon"></i>
+        Funnels
+      </a>
+
+      <span class="nav-section-label">Manage</span>
+
+      <a href="#" class="nav-item">
+        <i class="ti ti-users nav-item-icon"></i>
+        Contacts
+      </a>
+      <a href="#" class="nav-item">
+        <i class="ti ti-mail nav-item-icon"></i>
+        Campaigns
+      </a>
+      <a href="#" class="nav-item">
+        <i class="ti ti-tag nav-item-icon"></i>
+        Segments
+      </a>
+
+      <div class="sidebar-footer">
+        <a href="#" class="nav-item">
+          <i class="ti ti-settings nav-item-icon"></i>
+          Settings
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+      <header class="topbar">
+        <h1 class="topbar-title">Dashboard</h1>
+        <div class="topbar-actions">
+          <button class="btn btn-ghost btn-icon" aria-label="Notifications">
+            <i class="ti ti-bell"></i>
+          </button>
+          <button class="btn btn-primary">
+            <i class="ti ti-plus"></i>
+            New Campaign
+          </button>
+        </div>
+      </header>
+
+      <main class="content">
+        <!-- Stat Cards -->
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-label">Total Leads</span>
+              <i class="ti ti-users stat-card-icon"></i>
+            </div>
+            <div class="stat-card-value">12,847</div>
+            <div class="stat-card-delta up">
+              <i class="ti ti-trending-up"></i>
+              +8.2% this month
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-label">Conversion Rate</span>
+              <i class="ti ti-percent stat-card-icon"></i>
+            </div>
+            <div class="stat-card-value">3.4%</div>
+            <div class="stat-card-delta down">
+              <i class="ti ti-trending-down"></i>
+              -0.3% this month
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-label">Active Funnels</span>
+              <i class="ti ti-funnel stat-card-icon"></i>
+            </div>
+            <div class="stat-card-value">7</div>
+            <div class="stat-card-delta up">
+              <i class="ti ti-trending-up"></i>
+              +2 since last week
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-label">Revenue</span>
+              <i class="ti ti-currency-dollar stat-card-icon"></i>
+            </div>
+            <div class="stat-card-value">$94.2k</div>
+            <div class="stat-card-delta up">
+              <i class="ti ti-trending-up"></i>
+              +12.1% this month
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Campaigns Table -->
+        <div class="section-header">
+          <h2 class="section-title">Recent Campaigns</h2>
+          <button class="btn btn-ghost">
+            View all
+            <i class="ti ti-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Campaign</th>
+                <th>Status</th>
+                <th>Leads</th>
+                <th>Conversions</th>
+                <th>Revenue</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div>Black Friday Push</div>
+                  <div class="text-muted">Created Nov 1</div>
+                </td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td>4,231</td>
+                <td>187</td>
+                <td class="mono">$28,400</td>
+              </tr>
+              <tr>
+                <td>
+                  <div>Q4 Enterprise</div>
+                  <div class="text-muted">Created Oct 15</div>
+                </td>
+                <td><span class="badge badge-info">Scheduled</span></td>
+                <td>1,044</td>
+                <td>62</td>
+                <td class="mono">$41,200</td>
+              </tr>
+              <tr>
+                <td>
+                  <div>Re-engagement Series</div>
+                  <div class="text-muted">Created Oct 2</div>
+                </td>
+                <td><span class="badge badge-warning">Paused</span></td>
+                <td>3,810</td>
+                <td>91</td>
+                <td class="mono">$8,750</td>
+              </tr>
+              <tr>
+                <td>
+                  <div>Onboarding Drip</div>
+                  <div class="text-muted">Created Sep 12</div>
+                </td>
+                <td><span class="badge badge-neutral">Ended</span></td>
+                <td>2,187</td>
+                <td>210</td>
+                <td class="mono">$15,850</td>
+              </tr>
+              <tr>
+                <td>
+                  <div>Summer Flash Sale</div>
+                  <div class="text-muted">Created Aug 5</div>
+                </td>
+                <td><span class="badge badge-error">Failed</span></td>
+                <td>620</td>
+                <td>4</td>
+                <td class="mono">$320</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
