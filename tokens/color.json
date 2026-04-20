@@ -1,0 +1,58 @@
+{
+  "color": {
+    "brand": {
+      "primary": "#9333EA",
+      "secondary": "#7C3AED"
+    },
+    "action": {
+      "primary": "#84CC16",
+      "primary-hover": "#65A30D",
+      "primary-active": "#4D7C0F",
+      "destructive": "#EF4444",
+      "destructive-hover": "#DC2626"
+    },
+    "interaction": {
+      "accent": "#35C7DD",
+      "accent-hover": "#22B3CA",
+      "focus-ring": "#84CC16"
+    },
+    "surface": {
+      "base": "#0F0F14",
+      "card": "#111827",
+      "overlay": "#1A1F2E",
+      "sidebar": "#0A0A0F"
+    },
+    "border": {
+      "default": "#1F2937",
+      "subtle": "#111827",
+      "strong": "#374151"
+    },
+    "text": {
+      "primary": "#E5E7EB",
+      "secondary": "#B0B7C3",
+      "tertiary": "#9CA3AF",
+      "inverse": "#0F0F14",
+      "action": "#84CC16",
+      "accent": "#35C7DD",
+      "brand": "#9333EA"
+    },
+    "status": {
+      "success": "#22C55E",
+      "warning": "#F59E0B",
+      "error": "#EF4444",
+      "info": "#35C7DD"
+    },
+    "badge": {
+      "success-bg": "#14532D",
+      "success-text": "#86EFAC",
+      "warning-bg": "#78350F",
+      "warning-text": "#FDE68A",
+      "error-bg": "#7F1D1D",
+      "error-text": "#FECACA",
+      "info-bg": "#164E63",
+      "info-text": "#A5F3FC",
+      "neutral-bg": "#1F2937",
+      "neutral-text": "#B0B7C3"
+    }
+  }
+}

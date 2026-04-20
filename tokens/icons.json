@@ -1,0 +1,43 @@
+{
+  "icons": {
+    "library": "Tabler Icons",
+    "version": "3.x",
+    "style": "outline",
+    "cdn": "https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/outline/",
+    "size": {
+      "xs": "12px",
+      "sm": "16px",
+      "base": "20px",
+      "lg": "24px",
+      "xl": "32px"
+    },
+    "stroke-width": "1.5",
+    "usage": {
+      "rule-style": "outline only, never filled",
+      "rule-sizing": "match surrounding text size by default",
+      "rule-color": "inherit from parent text color unless semantically distinct",
+      "rule-accessibility": "decorative icons use aria-hidden=true; meaningful icons require aria-label or title"
+    },
+    "catalog": {
+      "nav-dashboard": "layout-dashboard",
+      "nav-funnels": "filter",
+      "nav-contacts": "users",
+      "nav-settings": "settings",
+      "nav-integrations": "plug",
+      "action-add": "plus",
+      "action-edit": "pencil",
+      "action-delete": "trash",
+      "action-search": "search",
+      "action-filter": "adjustments-horizontal",
+      "action-export": "download",
+      "action-refresh": "refresh",
+      "status-success": "circle-check",
+      "status-warning": "alert-triangle",
+      "status-error": "circle-x",
+      "status-info": "info-circle",
+      "chevron-right": "chevron-right",
+      "chevron-down": "chevron-down",
+      "external-link": "external-link"
+    }
+  }
+}

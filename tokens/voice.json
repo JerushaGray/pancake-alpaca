@@ -1,0 +1,52 @@
+{
+  "voice": {
+    "brand-name": "GetFunnelCaked",
+    "tagline": "Funnels that actually work. Probably.",
+    "principles": {
+      "dry-humor": "Wit is welcome. Punchlines are not required. If a sentence reads like it belongs in a quarterly report, fix it.",
+      "systems-first": "Lead with how the system works, then explain why. Operators want to understand before they trust.",
+      "empathetic-toward-operators": "Operators are running real businesses. Their stress is real. The product should feel like a competent colleague, not a cheerleader.",
+      "sarcasm-rules": "Sarcasm is allowed only when targeting broken logic, chaotic systems, or absurd industry norms. Never direct it at the user or their choices.",
+      "no-em-dashes": "Do not use em dashes (the — character, U+2014) or double hyphens (--) used as em dash substitutes. Use a comma, a period, or restructure the sentence."
+    },
+    "tone-by-context": {
+      "empty-states": "Direct and useful. Explain what is missing and how to fix it. A little dry is fine.",
+      "errors": "State what happened, then state what to do. No blame, no drama.",
+      "success-messages": "Confirm the action. Keep it short. Resist adding exclamation points.",
+      "onboarding": "Walk through the system clearly. Assume the user is smart but new.",
+      "tooltips": "One sentence. Fact-first. Spare the metaphors.",
+      "loading-states": "Either show progress or say nothing. Avoid performative optimism like 'Almost there!'."
+    },
+    "do": [
+      "Use plain language over jargon",
+      "Name things by what they do",
+      "Acknowledge when something is complex without apologizing for it",
+      "Use second person (you, your) to address the user directly"
+    ],
+    "do-not": [
+      "Use em dashes",
+      "Use exclamation points in error messages",
+      "Personify the product excessively",
+      "Direct sarcasm at users or their decisions",
+      "Use vague filler like 'seamlessly', 'powerful', or 'easy'"
+    ],
+    "examples": {
+      "empty-funnel": {
+        "bad": "No funnels yet! Get started by creating your first one!",
+        "good": "No funnels here. Add one to get the sequence going."
+      },
+      "save-success": {
+        "bad": "Awesome! Your changes were saved!",
+        "good": "Changes saved."
+      },
+      "delete-confirm": {
+        "bad": "Are you sure? This cannot be undone!",
+        "good": "This will permanently delete the funnel and its steps. Confirm to continue."
+      },
+      "integration-error": {
+        "bad": "Oops! Something went wrong connecting to your CRM.",
+        "good": "Connection failed. Check your API credentials and try again."
+      }
+    }
+  }
+}
