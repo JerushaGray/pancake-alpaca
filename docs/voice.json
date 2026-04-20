@@ -1,0 +1,48 @@
+{
+  "name": "GetFunnelCaked Voice System",
+  "principles": [
+    "dry, precise, no fluff",
+    "sarcasm targets systems, not people",
+    "direct and systems-first"
+  ],
+  "must_be_actionable": true,
+  "must_be_structured": true,
+  "forbidden_phrases": [
+    "leverage",
+    "synergy",
+    "best-in-class",
+    "cutting-edge",
+    "seamless",
+    "delightful",
+    "world-class",
+    "game-changer"
+  ],
+  "writing_rules": {
+    "no_em_dashes": true,
+    "max_paragraph_lines": 4,
+    "use_headers_and_bullets": true,
+    "tone": "actionable, systems-first"
+  },
+  "examples": {
+    "preferred": [
+      "Click Save to apply changes.",
+      "This field is required.",
+      "No data found. Add a contact to get started.",
+      "Your campaign is live. Track conversions in Analytics.",
+      "Error: Invalid email address."
+    ],
+    "avoid": [
+      "Seamlessly manage your leads.",
+      "We are delighted to offer you a best-in-class experience.",
+      "Leverage this cutting-edge funnel builder to synergize your pipeline.",
+      "Game-changing analytics at your fingertips."
+    ]
+  },
+  "ui_copy_rules": {
+    "buttons": "Use verbs. 'Save', 'Delete', 'Launch Campaign'. Not 'OK' or 'Submit'.",
+    "labels": "Nouns or noun phrases. No filler. 'Reply-to Email', not 'Please enter your reply-to email address'.",
+    "errors": "State the problem. Suggest the fix. 'Invalid email. Use format: user@domain.com'.",
+    "empty_states": "State what is empty. Offer the next action. 'No campaigns. Create one to get started.'",
+    "confirmations": "Confirm the action, not the system state. 'Campaign saved.' not 'Your campaign has been successfully saved to the system.'"
+  }
+}
