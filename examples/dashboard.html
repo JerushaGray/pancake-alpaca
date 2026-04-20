@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Tabler Icons (outline) -->
-  <script src="https://cdn.jsdelivr.net/npm/@tabler/icons@3.31.0/icons-react/dist/index.umd.js" defer></script>
+  <!-- Tabler Icons (webfont) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" />
 
   <!-- Brand tokens -->
   <link rel="stylesheet" href="../themes/css-variables.css" />
@@ -55,7 +55,7 @@
       gap: var(--space-2);
     }
 
-    .sidebar-logo svg {
+    .sidebar-logo .ti {
       color: var(--color-action-primary);
     }
 
@@ -95,7 +95,7 @@
       text-align: left;
     }
 
-    .nav-item svg {
+    .nav-item .ti {
       color: var(--color-text-tertiary);
       flex-shrink: 0;
       transition: color var(--duration-fast) var(--easing-default);
@@ -106,7 +106,7 @@
       color: var(--color-text-primary);
     }
 
-    .nav-item:hover svg {
+    .nav-item:hover .ti {
       color: var(--color-text-secondary);
     }
 
@@ -116,14 +116,14 @@
     }
 
     .nav-item.active {
-      background: rgba(132, 204, 22, 0.10);
+      background: var(--color-nav-item-active-bg);
       color: var(--color-text-action);
       font-weight: var(--font-weight-semibold);
-      border-left: 2px solid var(--color-action-primary);
-      padding-left: calc(var(--space-3) - 2px);
+      border-left: var(--border-width-indicator) solid var(--color-action-primary);
+      padding-left: calc(var(--space-3) - var(--border-width-indicator));
     }
 
-    .nav-item.active svg {
+    .nav-item.active .ti {
       color: var(--color-text-action);
     }
 
@@ -220,7 +220,8 @@
       font-weight: var(--font-weight-semibold);
       cursor: pointer;
       transition: background var(--duration-fast) var(--easing-default),
-                  border-color var(--duration-fast) var(--easing-default);
+                  border-color var(--duration-fast) var(--easing-default),
+                  transform var(--duration-fast) var(--easing-default);
       border: 1px solid transparent;
       text-decoration: none;
       line-height: var(--leading-tight);
@@ -238,6 +239,7 @@
 
     .btn-primary:hover {
       background: var(--color-action-primary-hover);
+      transform: translateY(-1px);
     }
 
     .btn-secondary {
@@ -248,6 +250,7 @@
 
     .btn-secondary:hover {
       background: var(--color-surface-overlay);
+      transform: translateY(-1px);
     }
 
     .btn-ghost {
@@ -259,11 +262,13 @@
     .btn-ghost:hover {
       background: var(--color-surface-overlay);
       color: var(--color-text-primary);
+      transform: translateY(-1px);
     }
 
     .btn:disabled {
-      opacity: 0.45;
+      opacity: var(--opacity-disabled);
       cursor: not-allowed;
+      transform: none;
     }
 
     /* ── Badge ────────────────────────────────────────── */
@@ -357,18 +362,195 @@
       margin-bottom: var(--space-8);
     }
 
-    .icon {
-      width: var(--icon-base);
-      height: var(--icon-base);
-      stroke: currentColor;
-      stroke-width: 1.5;
-      fill: none;
+    .ti {
+      font-style: normal;
+      line-height: 1;
       flex-shrink: 0;
+      font-size: var(--icon-base);
+      /* inherits color from parent */
+    }
+    .ti.icon-sm {
+      font-size: var(--icon-sm);
     }
 
-    .icon-sm {
-      width: var(--icon-sm);
-      height: var(--icon-sm);
+    /* ── Form ─────────────────────────────────────────── */
+    .form-section {
+      margin-bottom: var(--space-8);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1-5);
+    }
+
+    .form-label {
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-secondary);
+    }
+
+    .form-label .required-mark {
+      color: var(--color-status-error);
+      margin-left: var(--space-0-5);
+    }
+
+    .form-input {
+      width: 100%;
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      padding: var(--space-2) var(--space-3);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-text-primary);
+      transition: border-color var(--duration-fast) var(--easing-default);
+      outline: none;
+    }
+
+    .form-input::placeholder {
+      color: var(--color-text-tertiary);
+    }
+
+    .form-input:hover {
+      border-color: var(--color-border-strong);
+    }
+
+    .form-input:focus {
+      border-color: var(--color-action-primary);
+      outline: var(--focus-ring-width) solid var(--focus-ring-color);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    .form-input.input-error {
+      border-color: var(--color-status-error);
+    }
+
+    .form-input:disabled {
+      background: var(--color-surface-base);
+      border-color: var(--color-border-subtle);
+      opacity: var(--opacity-disabled);
+      cursor: not-allowed;
+    }
+
+    .form-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-input-wrapper .input-icon {
+      position: absolute;
+      left: var(--space-3);
+      color: var(--color-text-tertiary);
+      pointer-events: none;
+      font-size: var(--icon-sm);
+    }
+
+    .form-input-wrapper .form-input.has-icon {
+      padding-left: calc(var(--space-3) + var(--icon-sm) + var(--space-2));
+    }
+
+    .form-helper {
+      font-size: var(--text-xs);
+      color: var(--color-text-tertiary);
+    }
+
+    .form-error {
+      font-size: var(--text-xs);
+      color: var(--color-status-error);
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+
+    .form-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+
+    /* ── Table enhancements ───────────────────────────────── */
+    th.sortable {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    th.sortable:hover {
+      color: var(--color-text-secondary);
+    }
+
+    .th-sort-inner {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+
+    .sort-icon {
+      color: var(--color-text-tertiary);
+      font-size: var(--icon-sm);
+      line-height: 1;
+    }
+
+    .btn-row-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--icon-lg);
+      height: var(--icon-lg);
+      border-radius: var(--radius-md);
+      border: none;
+      background: transparent;
+      color: var(--color-text-tertiary);
+      cursor: pointer;
+      transition: background var(--duration-fast) var(--easing-default),
+                  color var(--duration-fast) var(--easing-default);
+      font-size: var(--icon-base);
+    }
+
+    .btn-row-action:hover {
+      background: var(--color-surface-overlay);
+      color: var(--color-text-primary);
+    }
+
+    .btn-row-action:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring-color);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    .table-empty-cell {
+      padding: var(--space-12) var(--space-4);
+      text-align: center;
+    }
+
+    .table-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      color: var(--color-text-tertiary);
+    }
+
+    .table-empty .ti {
+      font-size: var(--icon-xl);
+    }
+
+    .table-empty-title {
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-secondary);
+    }
+
+    .table-empty-subtitle {
+      font-size: var(--text-sm);
+      color: var(--color-text-tertiary);
     }
   </style>
 </head>
@@ -377,9 +559,7 @@
   <!-- Sidebar -->
   <aside class="sidebar" aria-label="Main navigation">
     <div class="sidebar-logo">
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5 5 0 006.9 4.9M6 7l3 9m3-9l3 1m-3-1l-3 9a5 5 0 006.9 4.9M15 7l3 9m-9-6h6m-3-9v3" />
-      </svg>
+      <i class="ti ti-chart-funnel" aria-hidden="true"></i>
       GetFunnelCaked
     </div>
 
@@ -388,42 +568,32 @@
 
       <!-- Dashboard (active) -->
       <a href="#" class="nav-item active" aria-current="page">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" />
-        </svg>
+        <i class="ti ti-layout-dashboard" aria-hidden="true"></i>
         Dashboard
       </a>
 
       <!-- Funnels -->
       <a href="#" class="nav-item">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L13 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 017 21v-7.586L3.293 6.707A1 1 0 013 6V4z" />
-        </svg>
+        <i class="ti ti-filter" aria-hidden="true"></i>
         Funnels
       </a>
 
       <!-- Contacts -->
       <a href="#" class="nav-item">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m9-5a4 4 0 11-8 0 4 4 0 018 0zm6 2a3 3 0 11-6 0 3 3 0 016 0zM3 17a3 3 0 116 0 3 3 0 01-6 0z" />
-        </svg>
+        <i class="ti ti-users" aria-hidden="true"></i>
         Contacts
       </a>
 
       <!-- Integrations -->
       <a href="#" class="nav-item">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
+        <i class="ti ti-plug" aria-hidden="true"></i>
         Integrations
       </a>
     </nav>
 
     <div class="nav-bottom">
       <a href="#" class="nav-item">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><circle cx="12" cy="12" r="3" />
-        </svg>
+        <i class="ti ti-settings" aria-hidden="true"></i>
         Settings
       </a>
     </div>
@@ -444,9 +614,7 @@
         <div class="card-label">Active Funnels</div>
         <div class="metric-value">14</div>
         <div class="metric-delta">
-          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-          </svg>
+          <i class="ti ti-trending-up icon-sm" aria-hidden="true"></i>
           3 this week
         </div>
       </div>
@@ -455,9 +623,7 @@
         <div class="card-label">Total Conversions</div>
         <div class="metric-value">2,841</div>
         <div class="metric-delta">
-          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-          </svg>
+          <i class="ti ti-trending-up icon-sm" aria-hidden="true"></i>
           12.4% vs last month
         </div>
       </div>
@@ -466,9 +632,7 @@
         <div class="card-label">Avg. Completion Rate</div>
         <div class="metric-value">38%</div>
         <div class="metric-delta down">
-          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
+          <i class="ti ti-trending-down icon-sm" aria-hidden="true"></i>
           2.1% vs last month
         </div>
       </div>
@@ -477,9 +641,7 @@
         <div class="card-label">Contacts in Sequence</div>
         <div class="metric-value">509</div>
         <div class="metric-delta">
-          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-          </svg>
+          <i class="ti ti-trending-up icon-sm" aria-hidden="true"></i>
           41 added today
         </div>
       </div>
@@ -489,23 +651,98 @@
     <!-- Button Row -->
     <div class="button-row">
       <button class="btn btn-primary">
-        <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-        </svg>
+        <i class="ti ti-plus icon-sm" aria-hidden="true"></i>
         New Funnel
       </button>
       <button class="btn btn-secondary">
-        <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M8 12l4 4 4-4M12 4v12" />
-        </svg>
+        <i class="ti ti-download icon-sm" aria-hidden="true"></i>
         Export
       </button>
       <button class="btn btn-ghost">
-        <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582M20 20v-5h-.582M4.582 9A8 8 0 0120 15M19.418 15A8 8 0 014 9" />
-        </svg>
+        <i class="ti ti-refresh icon-sm" aria-hidden="true"></i>
         Refresh
       </button>
+    </div>
+
+    <!-- Form Example -->
+    <h2 class="section-title">New Funnel</h2>
+    <div class="card form-section">
+      <form novalidate>
+        <div class="form-grid">
+
+          <!-- Default state -->
+          <div class="form-field">
+            <label class="form-label" for="funnel-name">
+              Funnel Name <span class="required-mark" aria-hidden="true">*</span>
+            </label>
+            <input
+              id="funnel-name"
+              type="text"
+              class="form-input"
+              placeholder="e.g. Webinar Welcome Sequence"
+              aria-required="true"
+            />
+            <span class="form-helper">Used as the internal reference name.</span>
+          </div>
+
+          <!-- With leading icon (search/select style) -->
+          <div class="form-field">
+            <label class="form-label" for="funnel-owner">Owner</label>
+            <div class="form-input-wrapper">
+              <i class="ti ti-user input-icon" aria-hidden="true"></i>
+              <input
+                id="funnel-owner"
+                type="text"
+                class="form-input has-icon"
+                placeholder="Search team members…"
+              />
+            </div>
+          </div>
+
+          <!-- Error state -->
+          <div class="form-field">
+            <label class="form-label" for="funnel-goal">
+              Conversion Goal <span class="required-mark" aria-hidden="true">*</span>
+            </label>
+            <input
+              id="funnel-goal"
+              type="text"
+              class="form-input input-error"
+              value=""
+              aria-required="true"
+              aria-invalid="true"
+              aria-describedby="funnel-goal-error"
+            />
+            <span id="funnel-goal-error" class="form-error" role="alert">
+              <i class="ti ti-alert-circle" aria-hidden="true"></i>
+              A conversion goal is required.
+            </span>
+          </div>
+
+          <!-- Disabled state -->
+          <div class="form-field">
+            <label class="form-label" for="funnel-id">Funnel ID</label>
+            <input
+              id="funnel-id"
+              type="text"
+              class="form-input"
+              value="GFC-AUTO-0015"
+              disabled
+              aria-describedby="funnel-id-helper"
+            />
+            <span id="funnel-id-helper" class="form-helper">Auto-assigned. Cannot be changed.</span>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">
+            <i class="ti ti-plus icon-sm" aria-hidden="true"></i>
+            Create Funnel
+          </button>
+          <button type="button" class="btn btn-ghost">Cancel</button>
+        </div>
+      </form>
     </div>
 
     <!-- Funnel Table -->
@@ -514,11 +751,20 @@
       <table>
         <thead>
           <tr>
-            <th>Funnel Name</th>
-            <th>Stage</th>
-            <th class="align-center">Status</th>
-            <th class="align-right">Contacts</th>
-            <th class="align-right">Conv. Rate</th>
+            <th class="sortable" scope="col" aria-sort="none">
+              <span class="th-sort-inner">
+                Funnel Name <i class="ti ti-selector sort-icon" aria-hidden="true"></i>
+              </span>
+            </th>
+            <th scope="col">Stage</th>
+            <th class="align-center" scope="col">Status</th>
+            <th class="align-right" scope="col">Contacts</th>
+            <th class="sortable align-right" scope="col" aria-sort="none">
+              <span class="th-sort-inner">
+                Conv. Rate <i class="ti ti-selector sort-icon" aria-hidden="true"></i>
+              </span>
+            </th>
+            <th class="align-right" scope="col" aria-label="Actions"></th>
           </tr>
         </thead>
         <tbody>
@@ -528,6 +774,11 @@
             <td class="align-center"><span class="badge badge-success">Active</span></td>
             <td class="align-right">184</td>
             <td class="align-right">42%</td>
+            <td class="align-right">
+              <button class="btn-row-action" aria-label="Actions for Webinar Welcome Sequence">
+                <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+              </button>
+            </td>
           </tr>
           <tr>
             <td>Cold Outreach – Q2</td>
@@ -535,6 +786,11 @@
             <td class="align-center"><span class="badge badge-warning">Pending</span></td>
             <td class="align-right">96</td>
             <td class="align-right">--</td>
+            <td class="align-right">
+              <button class="btn-row-action" aria-label="Actions for Cold Outreach – Q2">
+                <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+              </button>
+            </td>
           </tr>
           <tr>
             <td>Re-engagement Drip</td>
@@ -542,6 +798,11 @@
             <td class="align-center"><span class="badge badge-info">Finishing</span></td>
             <td class="align-right">73</td>
             <td class="align-right">29%</td>
+            <td class="align-right">
+              <button class="btn-row-action" aria-label="Actions for Re-engagement Drip">
+                <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+              </button>
+            </td>
           </tr>
           <tr>
             <td>Onboarding – Enterprise</td>
@@ -549,6 +810,11 @@
             <td class="align-center"><span class="badge badge-success">Active</span></td>
             <td class="align-right">12</td>
             <td class="align-right">67%</td>
+            <td class="align-right">
+              <button class="btn-row-action" aria-label="Actions for Onboarding – Enterprise">
+                <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+              </button>
+            </td>
           </tr>
           <tr>
             <td>Trial Expiry Reminder</td>
@@ -556,6 +822,11 @@
             <td class="align-center"><span class="badge badge-neutral">Paused</span></td>
             <td class="align-right">41</td>
             <td class="align-right">18%</td>
+            <td class="align-right">
+              <button class="btn-row-action" aria-label="Actions for Trial Expiry Reminder">
+                <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+              </button>
+            </td>
           </tr>
           <tr>
             <td>Post-Purchase Upsell</td>
@@ -563,6 +834,22 @@
             <td class="align-center"><span class="badge badge-error">Errored</span></td>
             <td class="align-right">29</td>
             <td class="align-right">--</td>
+            <td class="align-right">
+              <button class="btn-row-action" aria-label="Actions for Post-Purchase Upsell">
+                <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tbody id="empty-state" style="display:none" role="status">
+          <tr>
+            <td colspan="6" class="table-empty-cell">
+              <div class="table-empty">
+                <i class="ti ti-inbox" aria-hidden="true"></i>
+                <p class="table-empty-title">No active funnels</p>
+                <p class="table-empty-subtitle">Create a funnel to get started.</p>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>

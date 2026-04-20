@@ -169,4 +169,16 @@
   --icon-base: 20px;
   --icon-lg:   24px;
   --icon-xl:   32px;
+
+  /* ── Interaction: Disabled ──────────────────────────────── */
+  --opacity-disabled: 0.45;
+
+  /* ── Icon: Stroke ───────────────────────────────────────── */
+  --icon-stroke-width: 1.5;
+
+  /* ── Layout: Indicator ──────────────────────────────────── */
+  --border-width-indicator: 2px;
+
+  /* ── Colors: Nav ────────────────────────────────────────── */
+  --color-nav-item-active-bg: rgba(132, 204, 22, 0.10);
 }
